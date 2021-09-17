@@ -1,0 +1,103 @@
+package word_guessing_game;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.HashMap;
+
+
+// main class
+
+public class Main {
+
+// the main game
+
+    static void game() {
+        HashMap<String, String> words = new HashMap<String, String>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        words.put("pen", "you use it to write");
+        words.put("book", "you read it");
+        words.put("swamp", "a bog or marsh.");
+        words.put("photosynthesis", "the process which plants grow");
+        words.put("mouse", "a small creature that may live in your house, inside holes");
+        System.out.println("There are " + words.size() + " words you have to guess");
+        int length = words.size();
+        int wrong = 0;
+        int correct = 0;
+        for (String i : words.keySet()) {
+i            System.out.println("word: ");
+            System.out.println(words.get(i));
+            try {
+                String word = br.readLine();            
+                if (word.equals(i)) {
+                    System.out.println("YAY! you guessed the word, time for the next one!");
+                    length --;
+                    correct ++;
+                }else {
+                    System.out.println("oh! its wrong! it was " + i);
+                    wrong ++;
+                }
+
+        }catch (IOException e) {
+            System.out.println(e);
+        }
+        
+        
+     
+        
+    }
+    System.out.println("These are the results - ");
+    System.out.println("wrong = " + wrong + " \n correct = " + correct);
+    if (wrong == 0 && correct == 5) {
+        System.out.println("wow you are good!");
+    }else if (wrong > correct){
+        System.out.println("ohh, you have to learn a lot!");
+    }else if (wrong < correct) {
+        System.out.println("good!");
+    }
+
+    }
+
+    // check age
+
+    static void check_age(String name) {
+        int age;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("We just have to check your age(Beacuase if your're younger than 5, you can't read!): ");
+        try {
+        age = Integer.parseInt(br.readLine());
+        if (age >= 6) {
+            System.out.println("You are old enough!");
+            game();
+        }else {
+            System.out.println("sorry" + name + " you are not old enough!");
+        }
+
+    }catch (IOException e) {
+        System.out.println(e);
+    }
+}
+
+	// main method
+
+    public static void main(String[] args) {
+        String name, start;
+        System.out.println("word guess pro!");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Type your name");
+            name = br.readLine();
+            System.out.println("Lets get started!(y/n) ");
+            start = br.readLine();
+            if (start.equals("y")){
+                check_age(name);
+            }
+
+        }catch (IOException e) {
+            System.out.println("SORRY EXECEPTION OCCURED");
+        }
+
+    }
+    
+}
+
+
